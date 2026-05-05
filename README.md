@@ -43,11 +43,11 @@ The system was designed with remote and off-grid communities in mind, where acce
 
 ## Model Performance
 
-| Model | Normalized MAE | 7-Day Live MAE |
-|-------|---------------|----------------|
-| Load  | 0.052         | 42.6 kW        |
-| Solar | 0.021         | 37.5 kW        |
-| Wind  | 0.077         | 66.0 kW        |
+| Model | Normalized MAE |
+|-------|---------------|
+| Load  | 0.052         |
+| Solar | 0.021         |
+| Wind  | 0.077         |
 
 ---
 
