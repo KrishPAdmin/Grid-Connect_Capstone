@@ -1,0 +1,17 @@
+{
+  "kind": "load",
+  "seq_len": 48,
+  "epochs": 120,
+  "batch_size": 128,
+  "lr": 0.001,
+  "feature_columns": [
+    "LoadPower",
+    "Hour",
+    "Day",
+    "DayYear",
+    "Month",
+    "Season"
+  ],
+  "target_column": "LoadPower",
+  "model_name": "load_model_live"
+}

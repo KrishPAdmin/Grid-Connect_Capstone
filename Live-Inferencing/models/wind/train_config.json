@@ -1,0 +1,17 @@
+{
+  "kind": "wind",
+  "seq_len": 48,
+  "epochs": 80,
+  "batch_size": 64,
+  "lr": 0.001,
+  "feature_columns": [
+    "WindPower",
+    "Hour",
+    "Day",
+    "DayYear",
+    "Month",
+    "Season"
+  ],
+  "target_column": "WindPower",
+  "model_name": "wind_model_live"
+}
