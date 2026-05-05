@@ -56,7 +56,7 @@ The system was designed with remote and off-grid communities in mind, where acce
 ### Inference Pipeline
 
 <p align="center">
-  <img src="Images/readme/Screenshot_2026-04-06_164118.png" alt="CNN+LSTM Inference Pipeline" width="900"/>
+  <img src="Images/readme/Inference-Pipeline-Diagram.png" alt="CNN+LSTM Inference Pipeline" width="900"/>
 </p>
 
 The inference pipeline reads from the InfluxDB simulations bucket, preprocesses data into per-model feature windows, runs all three CNN+LSTM models on GPU, and applies post-processing (persistence blending, bias correction, wind cap) before writing five forecast series back to InfluxDB.
@@ -64,7 +64,7 @@ The inference pipeline reads from the InfluxDB simulations bucket, preprocesses 
 ### Scheduling Daemon
 
 <p align="center">
-  <img src="Images/readme/Screenshot_2026-04-06_111601.png" alt="Hourly Inference Scheduling Daemon" width="900"/>
+  <img src="Images/readme/Scheduling-Daemon-Flowchart.png" alt="Hourly Inference Scheduling Daemon" width="900"/>
 </p>
 
 A systemd service triggers the pipeline once per hour. A state-file deduplication guard prevents repeated execution within the same hour window.
