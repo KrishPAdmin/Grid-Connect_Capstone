@@ -86,7 +86,7 @@ A systemd service triggers the pipeline once per hour. A state-file deduplicatio
 
 ---
 
-## Weather Station
+## Weather Station Circuitry
 
 <p align="center">
   <img src="Images/readme/RPi-Hardware.JPG" alt="RPi Weather Station Hardware" width="500"/>
