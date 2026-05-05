@@ -23,7 +23,7 @@ This project was completed as part of the 2025 Electrical & Computer Engineering
 
 ## Overview
 
-Grid Connect is an end-to-end software platform for monitoring, analyzing, and automating microgrid operations. It integrates real-time data from distributed energy resources (DERs) — solar, wind, and battery storage — with machine learning forecasting models and a live Grafana dashboard to help operators make proactive, data-driven decisions.
+Grid Connect is an end-to-end software platform for monitoring, analyzing, and automating microgrid operations. It integrates real-time data from distributed energy resources (DERs) - solar, wind, and battery storage - with machine learning forecasting models and a live Grafana dashboard to help operators make proactive, data-driven decisions.
 
 The system was designed with remote and off-grid communities in mind, where access to main utility infrastructure is limited or unavailable.
 
@@ -31,23 +31,23 @@ The system was designed with remote and off-grid communities in mind, where acce
 
 ## Features
 
-- **DER Simulator** — Replays real historical data (Penmanshiel wind farm, UCSD microgrid) to emulate live solar, wind, load, and battery conditions via a JSON HTTP API
-- **CNN+LSTM Forecasting Models** — Three independently trained hybrid models forecasting the next hour of load demand, solar generation, and wind power
-- **Live Inference Pipeline** — Hourly systemd daemon that queries InfluxDB, runs PyTorch inference, applies post-processing (persistence blending, bias correction, wind cap), and writes forecasts back to InfluxDB
-- **InfluxDB + Telegraf** — Time-series database with a Telegraf ingestion layer supporting multiple data sources
-- **Grafana Dashboards** — Real-time and historical dashboards for load, generators, storage, and model accuracy statistics
-- **Real-time Alerting** — Discord notifications via Grafana for abnormal generation, load, and battery conditions
-- **RPi Weather Station** — Raspberry Pi 4B with BME280 and VEML7700 sensors in a custom 3D-printed enclosure, streaming local temperature, humidity, pressure, and lux readings
+- **DER Simulator** - Replays real historical data (Penmanshiel wind farm, UCSD microgrid) to emulate live solar, wind, load, and battery conditions via a JSON HTTP API
+- **CNN+LSTM Forecasting Models** - Three independently trained hybrid models forecasting the next hour of load demand, solar generation, and wind power
+- **Live Inference Pipeline** - Hourly systemd daemon that queries InfluxDB, runs PyTorch inference, applies post-processing (persistence blending, bias correction, wind cap), and writes forecasts back to InfluxDB
+- **InfluxDB + Telegraf** - Time-series database with a Telegraf ingestion layer supporting multiple data sources
+- **Grafana Dashboards** - Real-time and historical dashboards for load, generators, storage, and model accuracy statistics
+- **Real-time Alerting** - Discord notifications via Grafana for abnormal generation, load, and battery conditions
+- **RPi Weather Station** - Raspberry Pi 4B with BME280 and VEML7700 sensors in a custom 3D-printed enclosure, streaming local temperature, humidity, pressure, and lux readings
 
 ---
 
 ## Model Performance
 
-| Model | Normalized MAE |
-|-------|---------------|
-| Load  | 0.052         |
-| Solar | 0.021         |
-| Wind  | 0.077         |
+| Model | Normalized MAE | 7-Day Live MAE |
+|-------|---------------|----------------|
+| Load  | 0.052         | 42.6 kW        |
+| Solar | 0.021         | 37.5 kW        |
+| Wind  | 0.077         | 66.0 kW        |
 
 ---
 
@@ -56,7 +56,7 @@ The system was designed with remote and off-grid communities in mind, where acce
 ### Inference Pipeline
 
 <p align="center">
-  <img src="Images/readme/Inference-Pipeline-Diagram.png" alt="CNN+LSTM Inference Pipeline" width="900"/>
+  <img src="Images/readme/Screenshot_2026-04-06_164118.png" alt="CNN+LSTM Inference Pipeline" width="900"/>
 </p>
 
 The inference pipeline reads from the InfluxDB simulations bucket, preprocesses data into per-model feature windows, runs all three CNN+LSTM models on GPU, and applies post-processing (persistence blending, bias correction, wind cap) before writing five forecast series back to InfluxDB.
@@ -64,7 +64,7 @@ The inference pipeline reads from the InfluxDB simulations bucket, preprocesses 
 ### Scheduling Daemon
 
 <p align="center">
-  <img src="Images/readme/Scheduling-Daemon-Flowchart.png" alt="Hourly Inference Scheduling Daemon" width="900"/>
+  <img src="Images/readme/Screenshot_2026-04-06_111601.png" alt="Hourly Inference Scheduling Daemon" width="900"/>
 </p>
 
 A systemd service triggers the pipeline once per hour. A state-file deduplication guard prevents repeated execution within the same hour window.
@@ -89,7 +89,7 @@ A systemd service triggers the pipeline once per hour. A state-file deduplicatio
 ## Weather Station
 
 <p align="center">
-  <img src="Images/readme/RPi-Hardware.JPG" alt="RPi Weather Station Hardware" width="500"/>
+  <img src="Images/readme/IMG_3962.JPG" alt="RPi Weather Station Hardware" width="500"/>
 </p>
 
 The weather station was built around a Raspberry Pi 4B with a BME280 sensor (temperature, humidity, barometric pressure) and a VEML7700 ambient light sensor (lux), connected over I2C. The unit was housed in a custom 3D-printed enclosure designed with angled vents, drainage holes, and an elevated base for outdoor durability.
