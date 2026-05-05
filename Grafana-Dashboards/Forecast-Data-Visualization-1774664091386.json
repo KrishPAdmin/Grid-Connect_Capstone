@@ -1,0 +1,1980 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 9,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 1,
+          "mappings": [],
+          "max": 800,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 350
+              },
+              {
+                "color": "green",
+                "value": 420
+              },
+              {
+                "color": "orange",
+                "value": 550
+              },
+              {
+                "color": "red",
+                "value": 700
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "id": 12,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "from(bucket: \"simulations\")\n  |> range(start: -10m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http\")\n  |> filter(fn: (r) => r[\"_field\"] == \"load\")\n  |> filter(fn: (r) => r[\"source\"] == \"powersim3.0\")\n  |> last()",
+          "refId": "A"
+        }
+      ],
+      "title": "Live Load (kW)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 1,
+          "mappings": [],
+          "max": 500,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 50
+              },
+              {
+                "color": "green",
+                "value": 200
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "id": 10,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "from(bucket: \"simulations\")\n  |> range(start: -10m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http\")\n  |> filter(fn: (r) => r[\"_field\"] == \"solar_power\")\n  |> filter(fn: (r) => r[\"source\"] == \"powersim3.0\")\n  |> last()\n  |> map(fn: (r) => ({r with _value: if r._value < 0.0 then 0.0 else r._value}))",
+          "refId": "A"
+        }
+      ],
+      "title": "Live Solar Power (kW)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 1,
+          "mappings": [],
+          "max": 2100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 150
+              },
+              {
+                "color": "green",
+                "value": 600
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 12,
+        "y": 0
+      },
+      "id": 11,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "from(bucket: \"simulations\")\n  |> range(start: -10m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http\")\n  |> filter(fn: (r) => r[\"_field\"] == \"wind_power\")\n  |> filter(fn: (r) => r[\"source\"] == \"powersim3.0\")\n  |> last()",
+          "refId": "A"
+        }
+      ],
+      "title": "Live Wind Power (kW)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "description": "Renewable + battery discharge - battery charge - load. Positive = net export.",
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 1,
+          "mappings": [],
+          "max": 2200,
+          "min": -800,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": -200
+              },
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "id": 14,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "from(bucket: \"simulations\")\n  |> range(start: -10m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http\")\n  |> filter(fn: (r) => r[\"_field\"] == \"solar_power\" or r[\"_field\"] == \"wind_power\"\n      or r[\"_field\"] == \"load\" or r[\"_field\"] == \"battery_discharge\"\n      or r[\"_field\"] == \"battery_charge\")\n  |> filter(fn: (r) => r[\"source\"] == \"powersim3.0\")\n  |> last()\n  |> pivot(rowKey: [\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> map(fn: (r) => ({_time: r._time, _value:\n      (if float(v: r.solar_power) > 0.0 then float(v: r.solar_power) else 0.0)\n      + (if float(v: r.wind_power) > 0.0 then float(v: r.wind_power) else 0.0)\n      + (if exists r.battery_discharge then float(v: r.battery_discharge) else 0.0)\n      - (if exists r.battery_charge then float(v: r.battery_charge) else 0.0)\n      - float(v: r.load)}))\n  |> keep(columns: [\"_time\", \"_value\"])",
+          "refId": "A"
+        }
+      ],
+      "title": "Live Net Power (kW)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 1,
+          "mappings": [],
+          "max": 800,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 350
+              },
+              {
+                "color": "green",
+                "value": 420
+              },
+              {
+                "color": "orange",
+                "value": 550
+              },
+              {
+                "color": "red",
+                "value": 700
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 6
+      },
+      "id": 1,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "from(bucket: \"forecast\")\n  |> range(start: -2h, stop: 2h)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"forecast_load_series\")\n  |> filter(fn: (r) => r[\"model\"] == \"live_combined_v1\")\n  |> filter(fn: (r) => r[\"horizon\"] == \"1h\")\n  |> filter(fn: (r) => r[\"_field\"] == \"PredictedValue\")\n  |> aggregateWindow(every: 1h, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> last()",
+          "refId": "A"
+        }
+      ],
+      "title": "Next Hour Load Forecast (kW)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 1,
+          "mappings": [],
+          "max": 500,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 50
+              },
+              {
+                "color": "green",
+                "value": 200
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 6,
+        "y": 6
+      },
+      "id": 2,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "from(bucket: \"forecast\")\n  |> range(start: -2h, stop: 2h)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"forecast_solar_series\")\n  |> filter(fn: (r) => r[\"model\"] == \"live_combined_v1\")\n  |> filter(fn: (r) => r[\"horizon\"] == \"1h\")\n  |> filter(fn: (r) => r[\"_field\"] == \"PredictedValue\")\n  |> aggregateWindow(every: 1h, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> last()",
+          "refId": "A"
+        }
+      ],
+      "title": "Next Hour Solar Forecast (kW)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 1,
+          "mappings": [],
+          "max": 2100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 150
+              },
+              {
+                "color": "green",
+                "value": 600
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 12,
+        "y": 6
+      },
+      "id": 3,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "from(bucket: \"forecast\")\n  |> range(start: -2h, stop: 2h)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"forecast_wind_series\")\n  |> filter(fn: (r) => r[\"model\"] == \"live_combined_v1\")\n  |> filter(fn: (r) => r[\"horizon\"] == \"1h\")\n  |> filter(fn: (r) => r[\"_field\"] == \"PredictedValue\")\n  |> aggregateWindow(every: 1h, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> last()",
+          "refId": "A"
+        }
+      ],
+      "title": "Next Hour Wind Forecast (kW)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 1,
+          "mappings": [],
+          "max": 2500,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 200
+              },
+              {
+                "color": "green",
+                "value": 800
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 18,
+        "y": 6
+      },
+      "id": 4,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "from(bucket: \"forecast\")\n  |> range(start: -2h, stop: 2h)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"forecast_total_renewable_series\")\n  |> filter(fn: (r) => r[\"model\"] == \"live_combined_v1\")\n  |> filter(fn: (r) => r[\"horizon\"] == \"1h\")\n  |> filter(fn: (r) => r[\"_field\"] == \"PredictedValue\")\n  |> aggregateWindow(every: 1h, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> last()",
+          "refId": "A"
+        }
+      ],
+      "title": "Next Hour Total Renewable Forecast (kW)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 8,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "displayName": "${__field.labels.series_name}",
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Actual Load"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Forecast Load"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 0,
+        "y": 12
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "actual = from(bucket: \"simulations\")\n  |> range(start: v.timeRangeStart, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http\")\n  |> filter(fn: (r) => r[\"_field\"] == \"load\")\n  |> filter(fn: (r) => r[\"source\"] == \"powersim3.0\")\n  |> aggregateWindow(every: 1h, fn: mean, createEmpty: false, timeSrc: \"_start\")\n  |> set(key: \"series_name\", value: \"Actual Load\")\n\nforecast = from(bucket: \"forecast\")\n  |> range(start: v.timeRangeStart, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"forecast_load_series\")\n  |> filter(fn: (r) => r[\"_field\"] == \"PredictedValue\")\n  |> filter(fn: (r) => r[\"model\"] == \"live_combined_v1\")\n  |> filter(fn: (r) => r[\"horizon\"] == \"1h\")\n  |> aggregateWindow(every: 1h, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> set(key: \"series_name\", value: \"Forecast Load\")\n\nunion(tables: [actual, forecast])\n  |> keep(columns: [\"_time\", \"_value\", \"series_name\"])\n  |> group(columns: [\"series_name\"])",
+          "refId": "A"
+        }
+      ],
+      "title": "Load: Actual vs Forecast",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 8,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "displayName": "${__field.labels.series_name}",
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Actual Solar"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Forecast Solar"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 8,
+        "y": 12
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "import \"date\"\n\nactual = from(bucket: \"simulations\")\n  |> range(start: v.timeRangeStart, stop: date.add(d: 2h, to: now()))\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http\")\n  |> filter(fn: (r) => r[\"_field\"] == \"solar_power\")\n  |> filter(fn: (r) => r[\"source\"] == \"powersim3.0\")\n  |> aggregateWindow(every: 1h, fn: mean, createEmpty: false, timeSrc: \"_start\")\n  |> set(key: \"series_name\", value: \"Actual Solar\")\n\nforecast = from(bucket: \"forecast\")\n  |> range(start: v.timeRangeStart, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"forecast_solar_series\")\n  |> filter(fn: (r) => r[\"_field\"] == \"PredictedValue\")\n  |> filter(fn: (r) => r[\"model\"] == \"live_combined_v1\")\n  |> filter(fn: (r) => r[\"horizon\"] == \"1h\")\n  |> aggregateWindow(every: 1h, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> set(key: \"series_name\", value: \"Forecast Solar\")\n\nunion(tables: [actual, forecast])\n  |> keep(columns: [\"_time\", \"_value\", \"series_name\"])\n  |> group(columns: [\"series_name\"])",
+          "refId": "A"
+        }
+      ],
+      "title": "Solar: Actual vs Forecast",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 8,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "displayName": "${__field.labels.series_name}",
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Actual Wind"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Forecast Wind"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 16,
+        "y": 12
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "actual = from(bucket: \"simulations\")\n  |> range(start: v.timeRangeStart, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http\")\n  |> filter(fn: (r) => r[\"_field\"] == \"wind_power\")\n  |> filter(fn: (r) => r[\"source\"] == \"powersim3.0\")\n  |> aggregateWindow(every: 1h, fn: mean, createEmpty: false, timeSrc: \"_start\")\n  |> set(key: \"series_name\", value: \"Actual Wind\")\n\nforecast = from(bucket: \"forecast\")\n  |> range(start: v.timeRangeStart, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"forecast_wind_series\")\n  |> filter(fn: (r) => r[\"_field\"] == \"PredictedValue\")\n  |> filter(fn: (r) => r[\"model\"] == \"live_combined_v1\")\n  |> filter(fn: (r) => r[\"horizon\"] == \"1h\")\n  |> aggregateWindow(every: 1h, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> set(key: \"series_name\", value: \"Forecast Wind\")\n\nunion(tables: [actual, forecast])\n  |> keep(columns: [\"_time\", \"_value\", \"series_name\"])\n  |> group(columns: [\"series_name\"])",
+          "refId": "A"
+        }
+      ],
+      "title": "Wind: Actual vs Forecast",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 8,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "displayName": "${__field.labels._measurement}",
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 0,
+        "y": 21
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "from(bucket: \"forecast\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_field\"] == \"PredictedValue\")\n  |> filter(fn: (r) => r[\"model\"] == \"live_combined_v1\")\n  |> filter(fn: (r) => r[\"horizon\"] == \"1h\")\n  |> filter(fn: (r) => r[\"_measurement\"] == \"forecast_load_series\" or r[\"_measurement\"] == \"forecast_solar_series\" or r[\"_measurement\"] == \"forecast_wind_series\" or r[\"_measurement\"] == \"forecast_total_renewable_series\")\n  |> aggregateWindow(every: 1h, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> keep(columns: [\"_time\", \"_value\", \"_measurement\"])",
+          "refId": "A"
+        }
+      ],
+      "title": "Combined 1h Forecast History",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 8,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "displayName": "${__field.labels.series_name}",
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Actual Renewable + Battery"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Forecast Renewable (no battery)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 8,
+        "y": 21
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "actual = from(bucket: \"simulations\")\n  |> range(start: v.timeRangeStart, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http\")\n  |> filter(fn: (r) => r[\"_field\"] == \"solar_power\" or r[\"_field\"] == \"wind_power\"\n      or r[\"_field\"] == \"battery_discharge\" or r[\"_field\"] == \"battery_charge\")\n  |> filter(fn: (r) => r[\"source\"] == \"powersim3.0\")\n  |> aggregateWindow(every: 1h, fn: mean, createEmpty: false, timeSrc: \"_start\")\n  |> pivot(rowKey: [\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> map(fn: (r) => ({_time: r._time,\n      _value: float(v: r.solar_power)\n        + float(v: r.wind_power)\n        + (if exists r.battery_discharge then float(v: r.battery_discharge) else 0.0)\n        - (if exists r.battery_charge then float(v: r.battery_charge) else 0.0),\n      series_name: \"Actual Renewable + Battery\"}))\n\nforecast = from(bucket: \"forecast\")\n  |> range(start: v.timeRangeStart, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"forecast_total_renewable_series\")\n  |> filter(fn: (r) => r[\"_field\"] == \"PredictedValue\")\n  |> filter(fn: (r) => r[\"model\"] == \"live_combined_v1\")\n  |> filter(fn: (r) => r[\"horizon\"] == \"1h\")\n  |> aggregateWindow(every: 1h, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> set(key: \"series_name\", value: \"Forecast Renewable (no battery)\")\n\nunion(tables: [actual, forecast])\n  |> keep(columns: [\"_time\", \"_value\", \"series_name\"])\n  |> group(columns: [\"series_name\"])",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Supply: Actual vs Forecast (kW)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "description": "Green = actual grid pull after battery. Blue = portion of deficit covered by battery discharge. Orange = forecast grid pull (no battery model — upper bound).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 8,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "displayName": "${__field.labels.series_name}",
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Actual Grid Pull"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Battery Contribution"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Forecast Grid Pull"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 16,
+        "y": 21
+      },
+      "id": 15,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "raw = from(bucket: \"simulations\")\n  |> range(start: v.timeRangeStart, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http\")\n  |> filter(fn: (r) => r[\"_field\"] == \"solar_power\" or r[\"_field\"] == \"wind_power\"\n      or r[\"_field\"] == \"load\" or r[\"_field\"] == \"battery_discharge\")\n  |> filter(fn: (r) => r[\"source\"] == \"powersim3.0\")\n  |> aggregateWindow(every: 1h, fn: mean, createEmpty: false, timeSrc: \"_start\")\n  |> pivot(rowKey: [\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n\nactual_grid = raw\n  |> map(fn: (r) => {\n      batt_d  = if exists r.battery_discharge then float(v: r.battery_discharge) else 0.0\n      solar   = if float(v: r.solar_power) > 0.0 then float(v: r.solar_power) else 0.0\n      wind    = if float(v: r.wind_power)  > 0.0 then float(v: r.wind_power)  else 0.0\n      deficit = float(v: r.load) - solar - wind\n      grid    = if deficit - batt_d > 0.0 then deficit - batt_d else 0.0\n      return {_time: r._time, _value: grid, series_name: \"Actual Grid Pull\"}\n  })\n\nactual_batt = raw\n  |> map(fn: (r) => {\n      batt_d  = if exists r.battery_discharge then float(v: r.battery_discharge) else 0.0\n      solar   = if float(v: r.solar_power) > 0.0 then float(v: r.solar_power) else 0.0\n      wind    = if float(v: r.wind_power)  > 0.0 then float(v: r.wind_power)  else 0.0\n      deficit = float(v: r.load) - solar - wind\n      batt_contrib = if deficit > 0.0 then\n          (if batt_d < deficit then batt_d else deficit)\n        else 0.0\n      return {_time: r._time, _value: batt_contrib, series_name: \"Battery Contribution\"}\n  })\n\nforecast_gp = from(bucket: \"forecast\")\n  |> range(start: v.timeRangeStart, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"forecast_grid_pull_series\")\n  |> filter(fn: (r) => r[\"_field\"] == \"PredictedValue\")\n  |> filter(fn: (r) => r[\"model\"] == \"live_combined_v1\")\n  |> filter(fn: (r) => r[\"horizon\"] == \"1h\")\n  |> aggregateWindow(every: 1h, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> set(key: \"series_name\", value: \"Forecast Grid Pull\")\n\nunion(tables: [actual_grid, actual_batt, forecast_gp])\n  |> keep(columns: [\"_time\", \"_value\", \"series_name\"])\n  |> group(columns: [\"series_name\"])",
+          "refId": "A"
+        }
+      ],
+      "title": "Grid Pull vs Battery Contribution: Actual vs Forecast (kW)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "description": "Positive = net surplus. Battery discharge adds to supply; charge subtracts.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": true,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 2200,
+          "min": -800,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": -200
+              },
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 30
+      },
+      "id": 13,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "from(bucket: \"simulations\")\n  |> range(start: v.timeRangeStart, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http\")\n  |> filter(fn: (r) => r[\"_field\"] == \"solar_power\" or r[\"_field\"] == \"wind_power\"\n      or r[\"_field\"] == \"load\" or r[\"_field\"] == \"battery_discharge\"\n      or r[\"_field\"] == \"battery_charge\")\n  |> filter(fn: (r) => r[\"source\"] == \"powersim3.0\")\n  |> aggregateWindow(every: 1h, fn: mean, createEmpty: false, timeSrc: \"_start\")\n  |> pivot(rowKey: [\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> map(fn: (r) => ({_time: r._time, _value:\n      float(v: r.solar_power)\n      + float(v: r.wind_power)\n      + (if exists r.battery_discharge then float(v: r.battery_discharge) else 0.0)\n      - (if exists r.battery_charge then float(v: r.battery_charge) else 0.0)\n      - float(v: r.load)}))",
+          "refId": "A"
+        }
+      ],
+      "title": "Net Power History: Renewable + Battery minus Load (kW)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 1,
+          "mappings": [],
+          "max": 6400,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 500
+              },
+              {
+                "color": "green",
+                "value": 1000
+              },
+              {
+                "color": "red",
+                "value": 6001
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 39
+      },
+      "id": 20,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "from(bucket: \"simulations\")\n  |> range(start: -10m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http\")\n  |> filter(fn: (r) => r[\"_field\"] == \"battery_capacity\")\n  |> filter(fn: (r) => r[\"source\"] == \"powersim3.0\")\n  |> last()\n  |> group()\n  |> mean()",
+          "refId": "A"
+        }
+      ],
+      "title": "Live Battery SOC (kWh)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 1,
+          "mappings": [],
+          "max": 2200,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 1600
+              },
+              {
+                "color": "red",
+                "value": 2001
+              }
+            ]
+          },
+          "unit": "kwatt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 6,
+        "y": 39
+      },
+      "id": 21,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "from(bucket: \"simulations\")\n  |> range(start: -10m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http\")\n  |> filter(fn: (r) => r[\"_field\"] == \"battery_charge\")\n  |> filter(fn: (r) => r[\"source\"] == \"powersim3.0\")\n  |> last()\n  |> group()\n  |> mean()",
+          "refId": "A"
+        }
+      ],
+      "title": "Live Battery Charge Rate (kW)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 1,
+          "mappings": [],
+          "max": 2200,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 2001
+              }
+            ]
+          },
+          "unit": "kwatt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 12,
+        "y": 39
+      },
+      "id": 22,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "from(bucket: \"simulations\")\n  |> range(start: -10m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http\")\n  |> filter(fn: (r) => r[\"_field\"] == \"battery_discharge\")\n  |> filter(fn: (r) => r[\"source\"] == \"powersim3.0\")\n  |> last()\n  |> group()\n  |> mean()",
+          "refId": "A"
+        }
+      ],
+      "title": "Live Battery Discharge Rate (kW)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "description": "Positive = charging, Negative = discharging. Derived from forecast_renewable - forecast_load.",
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 1,
+          "mappings": [],
+          "max": 2000,
+          "min": -800,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": -200
+              },
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "kwatt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 18,
+        "y": 39
+      },
+      "id": 23,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "load_f = from(bucket: \"forecast\")\n  |> range(start: -2h, stop: 2h)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"forecast_load_series\")\n  |> filter(fn: (r) => r[\"model\"] == \"live_combined_v1\")\n  |> filter(fn: (r) => r[\"horizon\"] == \"1h\")\n  |> filter(fn: (r) => r[\"_field\"] == \"PredictedValue\")\n  |> aggregateWindow(every: 1h, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> keep(columns: [\"_time\", \"_value\"])\n\ngen_f = from(bucket: \"forecast\")\n  |> range(start: -2h, stop: 2h)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"forecast_total_renewable_series\")\n  |> filter(fn: (r) => r[\"model\"] == \"live_combined_v1\")\n  |> filter(fn: (r) => r[\"horizon\"] == \"1h\")\n  |> filter(fn: (r) => r[\"_field\"] == \"PredictedValue\")\n  |> aggregateWindow(every: 1h, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> keep(columns: [\"_time\", \"_value\"])\n\njoin(tables: {load: load_f, gen: gen_f}, on: [\"_time\"])\n  |> map(fn: (r) => ({_time: r._time,\n      _value: if r._value_gen - r._value_load > 2000.0 then 2000.0\n        else if r._value_gen - r._value_load < -2000.0 then -2000.0\n        else r._value_gen - r._value_load}))\n  |> last()",
+          "refId": "A"
+        }
+      ],
+      "title": "Next Hour Battery Net Forecast (kW)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 1,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Battery SOC"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 45
+      },
+      "id": 24,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "from(bucket: \"simulations\")\n  |> range(start: v.timeRangeStart, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http\")\n  |> filter(fn: (r) => r[\"_field\"] == \"battery_capacity\")\n  |> filter(fn: (r) => r[\"source\"] == \"powersim3.0\")\n  |> aggregateWindow(every: 1h, fn: mean, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"])\n  |> mean()\n  |> group()\n  |> map(fn: (r) => ({_time: r._time, _value: r._value, series_name: \"Battery SOC\"}))\n  |> group(columns: [\"series_name\"])",
+          "refId": "A"
+        }
+      ],
+      "title": "Battery State of Charge History (kWh)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "bff5gy8tz2lfka"
+      },
+      "description": "Forecast Net = forecast_renewable - forecast_load. Positive = expected charging, negative = expected discharging.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": true,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 8,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "displayName": "${__field.labels.series_name}",
+          "mappings": [],
+          "min": -2000,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "kwatt"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Actual Charge"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Actual Discharge"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Forecast Net"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 45
+      },
+      "id": 25,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "bff5gy8tz2lfka"
+          },
+          "query": "actual_charge = from(bucket: \"simulations\")\n  |> range(start: v.timeRangeStart, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http\")\n  |> filter(fn: (r) => r[\"_field\"] == \"battery_charge\")\n  |> filter(fn: (r) => r[\"source\"] == \"powersim3.0\")\n  |> aggregateWindow(every: 1h, fn: mean, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"])\n  |> mean()\n  |> group()\n  |> map(fn: (r) => ({_time: r._time, _value: r._value, series_name: \"Actual Charge\"}))\n\nactual_discharge = from(bucket: \"simulations\")\n  |> range(start: v.timeRangeStart, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http\")\n  |> filter(fn: (r) => r[\"_field\"] == \"battery_discharge\")\n  |> filter(fn: (r) => r[\"source\"] == \"powersim3.0\")\n  |> aggregateWindow(every: 1h, fn: mean, createEmpty: false, timeSrc: \"_start\")\n  |> group(columns: [\"_time\"])\n  |> mean()\n  |> group()\n  |> map(fn: (r) => ({_time: r._time, _value: -1.0 * r._value, series_name: \"Actual Discharge\"}))\n\nload_f = from(bucket: \"forecast\")\n  |> range(start: v.timeRangeStart, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"forecast_load_series\")\n  |> filter(fn: (r) => r[\"model\"] == \"live_combined_v1\")\n  |> filter(fn: (r) => r[\"horizon\"] == \"1h\")\n  |> filter(fn: (r) => r[\"_field\"] == \"PredictedValue\")\n  |> aggregateWindow(every: 1h, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> keep(columns: [\"_time\", \"_value\"])\n\ngen_f = from(bucket: \"forecast\")\n  |> range(start: v.timeRangeStart, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"forecast_total_renewable_series\")\n  |> filter(fn: (r) => r[\"model\"] == \"live_combined_v1\")\n  |> filter(fn: (r) => r[\"horizon\"] == \"1h\")\n  |> filter(fn: (r) => r[\"_field\"] == \"PredictedValue\")\n  |> aggregateWindow(every: 1h, fn: last, createEmpty: false, timeSrc: \"_start\")\n  |> keep(columns: [\"_time\", \"_value\"])\n\nforecast_net = join(tables: {load: load_f, gen: gen_f}, on: [\"_time\"])\n  |> map(fn: (r) => ({_time: r._time,\n      _value: if r._value_gen - r._value_load > 2000.0 then 2000.0\n        else if r._value_gen - r._value_load < -2000.0 then -2000.0\n        else r._value_gen - r._value_load,\n      series_name: \"Forecast Net\"}))\n\nunion(tables: [actual_charge, actual_discharge, forecast_net])\n  |> group(columns: [\"series_name\"])",
+          "refId": "A"
+        }
+      ],
+      "title": "Battery Charge/Discharge: Actual vs Forecast Net (kW)",
+      "type": "timeseries"
+    }
+  ],
+  "preload": false,
+  "refresh": "30s",
+  "schemaVersion": 42,
+  "tags": [
+    "capstone",
+    "forecast",
+    "microgrid"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "America/Toronto",
+  "title": "Forecast-Data-Visualization",
+  "uid": "microgrid-forecast-2026",
+  "version": 56
+}
