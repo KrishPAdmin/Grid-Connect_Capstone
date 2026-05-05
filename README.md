@@ -89,7 +89,7 @@ A systemd service triggers the pipeline once per hour. A state-file deduplicatio
 ## Weather Station
 
 <p align="center">
-  <img src="Images/readme/IMG_3962.JPG" alt="RPi Weather Station Hardware" width="500"/>
+  <img src="Images/readme/RPi-Hardware.JPG" alt="RPi Weather Station Hardware" width="500"/>
 </p>
 
 The weather station was built around a Raspberry Pi 4B with a BME280 sensor (temperature, humidity, barometric pressure) and a VEML7700 ambient light sensor (lux), connected over I2C. The unit was housed in a custom 3D-printed enclosure designed with angled vents, drainage holes, and an elevated base for outdoor durability.
